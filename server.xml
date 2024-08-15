@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="new server">
+    <!-- Automatic redirect to /maximo context -->
+    <webApplication name="root-context-redirect" location="root-context-redirect.war" context-root="/" />
+</server>
