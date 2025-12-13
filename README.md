@@ -7,14 +7,25 @@ When packaged as a part of customization archive and registered in the servers b
 
 ## Usage
 
-1. Include `tools/**` in the MAS Manage customization archive.
-2. Register `root-context-redirect` web application in the server bundle's [aditional server config](https://www.ibm.com/docs/en/mas-cd/maximo-manage/continuous-delivery?topic=customizing-configuring-application-server) (e.g. [server.xml](server.xml)).
+### Alternative 1
+
+1. Include `tools/**` in the MAS Manage customization archive or build your own customization archive directly using [package.sh](package.sh) script.
+
+> **Update (Dec 2025):** Inspired by [Jason VenHuizen's ](https://www.linkedin.com/in/venhuizen/) [MAS Maximo Redirect](https://github.com/sharptree/mas-maximo-redirect) implementation, being *more simple and easier to maintain*, I'm bringing the best out of his solution, namely:
+> 
+> * direct `server.xml` scripting
+> * support for all user-facing server bundle types (`all` + `ui`)
+> * customization archive packaging
+>
+> **NOTE:** I still opt for custom WAR deployment because of cleaner user experience (`HTTP 200` + `redirect` rather than `HTTP 404 Not found` + `redirect` using `httpDispatcher` adjustments).
+
+### Alternative 2
+
+1. Comment out `server.xml` update section in the [postpreprocessor.sh](tools/maximo/en/root-context-redirect/postpreprocessor.sh) file.
+2. Include `tools/**` in the MAS Manage customization archive or build your own customization archive directly using [package.sh](package.sh) script.
+3. Register `root-context-redirect` web application in the server bundle's [aditional server config](https://www.ibm.com/docs/en/mas-cd/maximo-manage/continuous-delivery?topic=customizing-configuring-application-server) (e.g. [server.xml](server.xml)).
 
 ## Customization
-
-### Other Server Bundles Support
-
-Example [postpreprocessor.sh](tools/maximo/en/postpreprocessor.sh) implementation supports **ALL** server bundle. It can be easily extended though to support other types of server bundles by copying [root-context-redirect.war](tools/maximo/en/root-context-redirect.war) to other deployment directories e.g. `maximo-ui`.
 
 ### Different Default Context
 
